@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.almarket.sehifeler.AnaSehifeEkrani
+import com.example.almarket.sehifeler.FullNotificationMain
 import com.example.almarket.sehifeler.LocationMain
 import com.example.almarket.sehifeler.NotificationMain
 import com.example.almarket.sehifeler.ProfilEkrani
@@ -49,16 +51,22 @@ fun AppNavHost(navController: NavHostController) {
             ProfilEkrani(navController)
         }
         composable(route = "Notifications"){
-            NotificationMain(navController)
+            NotificationMain(navController, viewModel = viewModel())
         }
         composable(route = "Vacancies"){
-            VacanciesMain(navController)
+            VacanciesMain(navController, viewModel = viewModel())
         }
         composable(route = "Shopping"){
             ShoppingMain(navController)
         }
         composable(route = "Location"){
             LocationMain(navController)
+        }
+        composable(route = "FullNotification/{notificationId}"){backStackEntry ->
+            val notificationId = backStackEntry.arguments?.getString("notificationId")?.toIntOrNull()
+            if (notificationId != null) {
+                FullNotificationMain(navController, notificationId)
+            }
         }
         }
     }

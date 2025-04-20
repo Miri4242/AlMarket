@@ -49,7 +49,7 @@ fun ProfilEkrani(navController: NavController){
 }
 
 @Composable
-fun ProfilSekliCard(){
+fun  ProfilSekliCard(){
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {

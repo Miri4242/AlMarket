@@ -1,24 +1,24 @@
-package com.example.almarket.sehifeler // Doğru paket adınızı kullandığınızdan emin olun
+package com.example.almarket.sehifeler
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.Call
-import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.Notifications
-import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,7 +34,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.AlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,15 +42,17 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.almarket.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnaSehifeEkrani(navController: NavController) {
     Scaffold(
         topBar = { MyAppTopBar(navController) },
                 bottomBar = { MyAppBottomBar(navController = navController) }
     ) { paddingValues ->
-
-        Text(text = "Ana Sayfa İçeriği", modifier = Modifier.padding(paddingValues))
+        LazyColumn (modifier = Modifier.padding(paddingValues)){
+            item{
+                MyAppMarketCard()
+            }
+        }
     }
 }
 
@@ -140,6 +141,46 @@ fun MyAppBottomBar(navController: NavController) {
                 icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
                 selected = false,
                 onClick = { navController.navigate("Profil") }
+            )
+        }
+    }
+}
+
+@Composable
+fun MyAppMarketCard(){
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Gray),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+            ) {
+            Icon(
+                painter = painterResource(id = R.drawable.img),
+                contentDescription = "Profil",
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .size(40.dp)
+            )
+            Text(
+                text = "0.00₼",
+                fontSize = 24.sp,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+            Image(
+                painter = painterResource(R.drawable.barcode),
+                contentDescription = "Barcode",
+                modifier = Modifier
+                    .size(height = 80.dp, width = 240.dp)
+            )
+            Text(
+                text = "2000 0000 0059 4115",
+                modifier = Modifier.padding(bottom = 4.dp)
             )
         }
     }
