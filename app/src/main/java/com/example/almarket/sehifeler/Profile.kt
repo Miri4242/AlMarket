@@ -1,17 +1,30 @@
 package com.example.almarket.sehifeler
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.displayCutoutPadding
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
@@ -42,7 +55,14 @@ fun ProfilEkrani(navController: NavController){
                     text = "Profil məlumatları",
                     fontSize = 24.sp,
                     modifier = Modifier.alpha(0.5f)
+                        .padding(start = 28.dp)
                 )
+            }
+            item {
+                ProfilButtonsCard("Blogs","Bloglar","Daxil ol və blogları gör")
+                ProfilButtonsCard("Personal","Şəxsi məlumatlar","Şəxsi məlumatlarivi idarə et")
+                ProfilButtonsCard("Settings","Tənzimləmələr","Dil və bildirişlər")
+                ProfilButtonsCard("Password","Şifrəvi dəyiş","Şifrənizi dəyişə bilərsiniz")
             }
         }
     }
@@ -62,6 +82,55 @@ fun  ProfilSekliCard(){
             fontSize = 14.sp,
             modifier = Modifier.alpha(0.5f)
         )
+    }
+}
+
+val iconMap = mapOf(
+    "Blogs" to Icons.Default.List,
+    "Personal" to Icons.Default.Person,
+    "Settings" to Icons.Default.Settings,
+    "Password" to Icons.Default.Lock
+)
+
+@Composable
+fun ProfilButtonsCard(iconName: String,buttonBasliq: String,buttonMetn:String){
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+    ) {
+        Row (
+            verticalAlignment = Alignment.CenterVertically, // Dikeyde ortalamak için
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            val icon = iconMap[iconName] ?: Icons.Default.Home // İlgili ikonu map'ten al, yoksa varsayılanı kullan
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = icon, // Doğru ImageVector'ı buraya atıyoruz
+                    contentDescription = "",
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .size(32.dp)
+                )
+                Column {
+                    Text(
+                        text = buttonBasliq
+                    )
+                    Text(
+                        text = buttonMetn
+                    )
+                }
+            }
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowRight,
+                contentDescription = "",
+                modifier = Modifier
+                    .size(32.dp)
+            )
+        }
     }
 }
 
