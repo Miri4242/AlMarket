@@ -66,7 +66,7 @@ fun MyAppTopBar(navController: NavController) {
         TopAppBar(
             title = { Text("") },
             navigationIcon = {
-                IconButton(onClick = { }) {
+                IconButton(onClick = {navController.navigate("AnaSehife") }) {
                     Image(
                         painter = painterResource(id = R.drawable.img),
                         contentDescription = "Profil",

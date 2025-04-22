@@ -10,7 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.List
@@ -28,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,7 +59,7 @@ fun ProfilEkrani(navController: NavController){
                     text = "Profil məlumatları",
                     fontSize = 24.sp,
                     modifier = Modifier.alpha(0.5f)
-                        .padding(start = 28.dp)
+                        .padding(start = 16.dp)
                 )
             }
             item {
@@ -63,6 +67,18 @@ fun ProfilEkrani(navController: NavController){
                 ProfilButtonsCard("Personal","Şəxsi məlumatlar","Şəxsi məlumatlarivi idarə et")
                 ProfilButtonsCard("Settings","Tənzimləmələr","Dil və bildirişlər")
                 ProfilButtonsCard("Password","Şifrəvi dəyiş","Şifrənizi dəyişə bilərsiniz")
+            }
+            item{
+                Spacer(modifier = Modifier.padding(top = 36.dp))
+                Text(
+                    text = "Əlavə",
+                    fontSize = 24.sp,
+                    modifier = Modifier.alpha(0.5f)
+                        .padding(start = 16.dp)
+                )
+                ProfilButtonsCard("Support","Yardım","Hər hansı problemdə kömək")
+                ProfilButtonsCard("Contact","Əlaqə","Bizimlə əlaqə saxlayın")
+                ProfilButtonsCard("LogOut","Çıxış","Hesabdan çıxış edin")
             }
         }
     }
@@ -72,6 +88,7 @@ fun ProfilEkrani(navController: NavController){
 fun  ProfilSekliCard(){
     Column(
         modifier = Modifier.fillMaxWidth()
+            .padding(start = 16.dp)
     ) {
         Text(
             text = "Miryusif Babayev",
@@ -89,7 +106,10 @@ val iconMap = mapOf(
     "Blogs" to Icons.Default.List,
     "Personal" to Icons.Default.Person,
     "Settings" to Icons.Default.Settings,
-    "Password" to Icons.Default.Lock
+    "Password" to Icons.Default.Lock,
+    "Support" to Icons.Default.Face,
+    "Contact" to Icons.Default.AccountBox,
+    "LogOut" to Icons.Default.Clear
 )
 
 @Composable
@@ -97,30 +117,32 @@ fun ProfilButtonsCard(iconName: String,buttonBasliq: String,buttonMetn:String){
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(top = 24.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
         Row (
-            verticalAlignment = Alignment.CenterVertically, // Dikeyde ortalamak için
+            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
         ){
-            val icon = iconMap[iconName] ?: Icons.Default.Home // İlgili ikonu map'ten al, yoksa varsayılanı kullan
+            val icon = iconMap[iconName] ?: Icons.Default.Home
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
-                    imageVector = icon, // Doğru ImageVector'ı buraya atıyoruz
+                    imageVector = icon,
                     contentDescription = "",
                     modifier = Modifier
                         .padding(end = 16.dp)
-                        .size(32.dp)
+                        .size(32.dp),
+                    tint = Color.Red
                 )
                 Column {
                     Text(
-                        text = buttonBasliq
+                        text = buttonBasliq,
                     )
                     Text(
-                        text = buttonMetn
+                        text = buttonMetn,
+                        modifier = Modifier.alpha(0.5f)
                     )
                 }
             }
