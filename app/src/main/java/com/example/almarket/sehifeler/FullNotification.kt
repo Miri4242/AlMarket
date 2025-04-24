@@ -15,7 +15,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.almarket.model.Notification
 import com.example.almarket.viewmodel.NotificationsViewModel
 
 @Composable

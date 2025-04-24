@@ -58,7 +58,7 @@ fun AnaSehifeEkrani(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyAppTopBar(navController: NavController) {
+fun MyAppTopBar(navController: NavController?) {
     Surface (
         modifier = Modifier
             .border(width = 0.5.dp, color = Color.Black)
@@ -66,7 +66,7 @@ fun MyAppTopBar(navController: NavController) {
         TopAppBar(
             title = { Text("") },
             navigationIcon = {
-                IconButton(onClick = {navController.navigate("AnaSehife") }) {
+                IconButton(onClick = { navController?.navigate("AnaSehife") }) {
                     Image(
                         painter = painterResource(id = R.drawable.img),
                         contentDescription = "Profil",
@@ -76,7 +76,7 @@ fun MyAppTopBar(navController: NavController) {
             },
             actions = {
                 Column (horizontalAlignment = Alignment.CenterHorizontally){
-                IconButton(onClick = {navController.navigate("Vacancies")}) {
+                IconButton(onClick = { navController?.navigate("Vacancies") }) {
                     Icon(
                         imageVector = Icons.Outlined.Call,
                         contentDescription = "Vacancies",
@@ -92,7 +92,7 @@ fun MyAppTopBar(navController: NavController) {
                     )
             }
                 Column (horizontalAlignment = Alignment.CenterHorizontally) {
-                    IconButton(onClick = {navController.navigate("Notifications")}) {
+                    IconButton(onClick = { navController?.navigate("Notifications") }) {
                         Icon(
                             imageVector = Icons.Outlined.Notifications,
                             contentDescription = "Notification",
@@ -116,7 +116,7 @@ fun MyAppTopBar(navController: NavController) {
 }
 
 @Composable
-fun MyAppBottomBar(navController: NavController) {
+fun MyAppBottomBar(navController: NavController?) {
     Surface (
         modifier = Modifier
             .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
@@ -125,22 +125,22 @@ fun MyAppBottomBar(navController: NavController) {
             NavigationBarItem(
                 icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
                 selected = false,
-                onClick = { navController.navigate("AnaSehife") }
+                onClick = { navController?.navigate("AnaSehife") }
             )
             NavigationBarItem(
                 icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Shop") },
                 selected = false,
-                onClick = { navController.navigate("Shopping") }
+                onClick = { navController?.navigate("Shopping") }
             )
             NavigationBarItem(
                 icon = { Icon(Icons.Default.LocationOn, contentDescription = "Location") },
                 selected = false,
-                onClick = { navController.navigate("Location") }
+                onClick = { navController?.navigate("Location") }
             )
             NavigationBarItem(
                 icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
                 selected = false,
-                onClick = { navController.navigate("Profil") }
+                onClick = { navController?.navigate("Profil") }
             )
         }
     }
